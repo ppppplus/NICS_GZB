@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="world_name" default="nics_world" />
+    <arg name="gui" default="true" />
+    <arg name="run_camera" default="false"/>
+    <arg name="use_sim_time" default="true"/>
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+      <arg name="world_name" value="$(find bringup)/worlds/nics_scene/$(arg world_name).world"/>
+      <arg name="gui" value="$(arg gui)"/>
+    </include>
+    
+    <group ns="AKM_1">
+        <rosparam file="$(find bringup)/param/wheelbase.yaml" command="load" />
+        
+        <param name="robot_description" command="$(find xacro)/xacro $(find akm_description)/urdf/akm.xacro" />
+        <node name="akm_spawn" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -model AKM_1 -param robot_description -z 0.5" />
+        
+        <include file="$(find akm_control)/launch/akm_control.launch">
+            <arg name="robot_name" value="AKM_1"/>
+        </include>
+        
+    </group>
+    <include file="$(find akm_gazebo)/launch/pose_ac.launch"/>
+    <!-- <node name="gazebo_pose" pkg="akm_gazebo" type="gazebo_pose_node.py"  output="screen" respawn="false"/> -->
+    
+    <!-- <node name="rviz" pkg="rviz" type="rviz"  /> -->
+
+</launch>
+    

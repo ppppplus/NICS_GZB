@@ -1,0 +1,3 @@
+<launch>
+    <node name="gazebo_pose" pkg="akm_gazebo" type="gazebo_pose_node.py"  output="screen"/>
+</launch>

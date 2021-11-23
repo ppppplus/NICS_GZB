@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<robot name="hill" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:property name="body_width" value="0.2"/>
+  <xacro:property name="body_height" value="1" />
+  <xacro:property name="mass" value="1000"/>
+  <xacro:property name="Jx" value="0.05"/>
+  <xacro:property name="Jy" value="0.05"/>
+  <xacro:property name="Jz" value="0.05"/>
+  <xacro:property name="Jxz" value="0.0"/>
+
+  <link name="cylinder_link">
+    <inertial>
+      <mass value="${mass}" />
+      <origin xyz="5 2 0" />
+      <inertia ixx="${Jx}" ixy="0.00" ixz="${Jxz}" iyy="${Jy}" iyz="0.00" izz="${Jz}" />
+    </inertial>
+    <visual name='visual'>
+        <geometry>
+           <cylinder radius="${body_width}" length="${body_height}"/>
+        </geometry>
+      </visual>
+
+    <collision name="plane_collision">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="${body_width}" length="${body_height}"/>
+      </geometry>
+    </collision>
+  </link>
+</robot>
+
+
+
+
