@@ -12,6 +12,8 @@ class MotionNode:
     def __init__(self):
         rospy.init_node('motion_node', anonymous=True)
         rospy.loginfo('motion node set up.')
+        self.vel_factor = rospy.get_param("~vel_factor", "4.0")
+        rospy.loginfo(type(self.vel_factor))
         self.image_width=640
         self.image_height=480
         self.center_band=50 #车道线偏移在center_band内不用修正
@@ -47,10 +49,10 @@ class MotionNode:
             bias = 0.0 #清零
 
         if search_flag == True:
-            velocity.linear.x =0.15#0.15
+            velocity.linear.x = 0.15 #0.15
             velocity.angular.z = 0.8 if self.last_bias>=0 else -0.8
         else:
-            velocity.linear.x =0.10+ 0.20*(1.0- abs(bias)/(self.image_width/2) )
+            velocity.linear.x = 0.10 + 0.20*(1.0- abs(bias)/(self.image_width/2) )
             velocity.angular.z = K_p*bias
 
         if velocity.angular.z > 0.86:
@@ -58,7 +60,7 @@ class MotionNode:
         if velocity.angular.z < -0.86:
 	        velocity.angular.z = -0.86        
 
-        velocity.linear.x*=4
+        velocity.linear.x*=self.vel_factor
         velocity.angular.z*=1
         self.velocityPub_.publish(velocity)
         if abs(bias)>=self.center_band:
