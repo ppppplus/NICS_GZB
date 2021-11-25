@@ -18,12 +18,13 @@
         <include file="$(find akm_control)/launch/akm_control.launch">
             <arg name="robot_name" value="AKM_1"/>
         </include>
-        
-    </group>
-    <include file="$(find akm_gazebo)/launch/pose_ac.launch"/>
-    <!-- <node name="gazebo_pose" pkg="akm_gazebo" type="gazebo_pose_node.py"  output="screen" respawn="false"/> -->
-    
-    <!-- <node name="rviz" pkg="rviz" type="rviz"  /> -->
 
+        <!-- show in rviz -->
+        <node name="rviz" pkg="rviz" type="rviz" args="-d $(find bringup)/rviz/nics.rviz" required="true" />
+        <include file="$(find akm_gazebo)/launch/pose_ac.launch"/>
+    </group>
+    
+    
+    
 </launch>
     

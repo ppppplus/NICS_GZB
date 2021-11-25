@@ -53,8 +53,8 @@ class OdometryNode:
 
         cmd = Odometry()
         cmd.header.stamp = self.last_recieved_stamp
-        cmd.header.frame_id = '/odom'
-        cmd.child_frame_id = '/base_link'
+        cmd.header.frame_id = self.robot_name + '/odom'
+        cmd.child_frame_id = self.robot_name + '/base_link'
         cmd.pose.pose = self.last_received_pose
         cmd.twist.twist = self.last_received_twist
         cmd.pose.covariance =[1e-3, 0, 0, 0, 0, 0,

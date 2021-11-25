@@ -26,6 +26,7 @@ sudo apt-get install ros-melodic-teb-local-planner
 ```
 roslaunch bringup nics.launch # NICS赛道模拟，运行前请修改nics_plane.world中的路径
 roslaunch racecar_control keyboard_nics.launch # NICS小车键盘控制
+roslaunch task_line_follower task_line_follower.launch # 巡线任务
 ```
 
 改变模型位置：http://gazebosim.org/tutorials?tut=ros_comm&cat=connect_ros

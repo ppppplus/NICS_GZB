@@ -1,0 +1,13 @@
+<launch>
+<arg name="robot_name" default="AKM_1"/>
+<group ns="$(arg robot_name)">
+
+    <!-- Detection node -->	
+	<node pkg="task_line_follower" name="detection_node" type="detection_node.py"  output="screen">
+		<param name="image_topic" value="/$(arg robot_name)/camera/zed/rgb/image_rect_color"/>
+	</node>
+	<!-- Robot commands node -->
+	<node pkg="task_line_follower" name="motion_node" type="motion_node.py"  output="screen">
+	</node>
+</group>
+</launch>

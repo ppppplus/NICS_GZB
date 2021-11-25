@@ -3,7 +3,7 @@
 <launch>
   <arg name="robot_name" default="AKM_1"/>
   <group ns="$(arg robot_name)">
-  <node pkg="akm_control" name="keyop" type="keyboard_teleop.py" output="screen">
-  </node>
+    <node pkg="akm_control" name="keyop" type="keyboard_teleop.py" output="screen">
+    </node>
   </group>
 </launch>
