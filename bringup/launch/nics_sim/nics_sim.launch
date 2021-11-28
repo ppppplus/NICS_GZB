@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <launch>
-    <arg name="world_name" default="nics_world" />
+    <arg name="world_name" default="nics_world_track" />
     <arg name="gui" default="true" />
     <arg name="run_camera" default="false"/>
     <arg name="use_sim_time" default="true"/>
