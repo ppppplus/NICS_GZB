@@ -109,6 +109,11 @@ namespace 存在时在 rviz 中显示 "Frame does not exist"，建议检查 tf_t
 </node>
 ```
 
+## Notes
+
+- 11.23: 合并巡线任务 
+- 11.18: 给赛道加入围栏
+
 ## Ref
 
 https://blog.csdn.net/qq_36754438/article/details/109125320
