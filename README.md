@@ -25,8 +25,9 @@ sudo apt-get install ros-melodic-velocity-controllers
 ## Tutorials
 
 ```
-roslaunch nics_bringup nics.launch # NICS赛道模拟，运行前请修改.world文件中的路径
-roslaunch racecar_control keyboard_teleop.launch # 小车键盘控制
+roslaunch nics_bringup nics_gazebo_simple.launch # NICS赛道模拟，运行前请修改.world文件中的路径
+roslaunch nics_bringup nics_gazebo_block.launch # NICS障碍赛道模拟，运行前请修改.world文件中的路径
+roslaunch akm_control keyboard_teleop.launch # 小车键盘控制
 roslaunch task_line_follower task_line_follower.launch # 巡线任务
 ```
 
