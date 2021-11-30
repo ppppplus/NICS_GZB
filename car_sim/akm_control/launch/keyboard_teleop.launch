@@ -1,9 +1,8 @@
-<?xml version='1.0'?>
-
 <launch>
   <arg name="robot_name" default="AKM_1"/>
   <group ns="$(arg robot_name)">
-    <node pkg="akm_control" name="keyop" type="keyboard_teleop.py" output="screen">
-    </node>
+  <!-- turtlebot_teleop_key already has its own built in velocity smoother -->
+  <node pkg="akm_control" type="keyboard_teleop.py" name="keyboard_teleop"  output="screen">
+  </node>
   </group>
 </launch>

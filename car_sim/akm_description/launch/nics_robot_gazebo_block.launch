@@ -1,0 +1,36 @@
+<launch>
+    <arg name="robot_name" default="AKM_1"/>
+    <arg name="world_name" value="$(find nics_bringup)/worlds/nics_scene/nics_world_cone.world"/>
+    <arg name="paused" default="false"/>
+    <arg name="use_sim_time" default="true"/>
+    <arg name="gui" default="true"/>
+    <arg name="headless" default="false"/>
+    <arg name="debug" default="false"/>
+    <arg name="x_pos" default="0.5"/>
+    <arg name="y_pos" default="-1.8"/>
+    <arg name="z_pos" default="0.5"/>
+    <arg name="yaw_pos" default="0"/>
+
+
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" value="$(arg world_name)" />
+        <arg name="debug" value="$(arg debug)" />
+        <arg name="gui" value="$(arg gui)" />
+        <arg name="paused" value="$(arg paused)"/>
+        <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+        <arg name="headless" value="$(arg headless)"/>
+    </include>
+    <group ns="$(arg robot_name)">
+
+    <arg name="model" default="$(find xacro)/xacro --inorder '$(find akm_description)/urdf/mini_akm/mini_akm.xacro'"/>
+    <param name="robot_description" command="$(arg model)" />
+     <!-- tf -->
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"  output="screen" >
+        <remap from="/joint_states" to="/$(arg robot_name)/joint_states"/>
+        <param name="publish_frequency" type="double" value="50.0" />
+    </node>
+    <!-- load urdf-->
+    <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf" 
+          args="-urdf -model $(arg robot_name) -param robot_description -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos) -Y $(arg yaw_pos)"/> 
+    </group>
+</launch>

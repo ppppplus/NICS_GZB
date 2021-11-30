@@ -4,11 +4,11 @@
 
     <!-- Detection node -->	
 	<node pkg="task_line_follower" name="detection_node" type="detection_node.py"  output="screen">
-		<param name="image_topic" type="string" value="/$(arg robot_name)/camera/zed/rgb/image_rect_color"/>
+		<param name="image_topic" type="string" value="/$(arg robot_name)/camera/rgb/image_raw"/>
 	</node>
 	<!-- Robot commands node -->
 	<node pkg="task_line_follower" name="motion_node" type="motion_node.py"  output="screen">
-		<param name="vel_factor" type="float" value="4.0"/>
+		<param name="vel_factor" value="4.0"/>
 	</node>
 </group>
 </launch>

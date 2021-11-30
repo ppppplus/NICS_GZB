@@ -1,4 +1,4 @@
-# Gazebo Test Field for Ackermann (Support Multiple Robots)
+# Gazebo Test Field for NICS AKM Car
 
 ## Build
 
@@ -17,15 +17,16 @@ sudo apt-get install ros-melodic-effort-controllers
 sudo apt-get install ros-melodic-joint-state-controller
 sudo apt-get install ros-melodic-position-controllers
 sudo apt-get install ros-melodic-teb-local-planner
+sudo apt-get install ros-melodic-velocity-controllers
 ```
 
-请修改nics_world.world中的URI路径，并编译功能包。
+**请修改nics_world.world、nics_world_cone.world中的URI路径，**并编译功能包。
 
 ## Tutorials
 
 ```
-roslaunch bringup nics.launch # NICS赛道模拟，运行前请修改nics_plane.world中的路径
-roslaunch racecar_control keyboard_nics.launch # NICS小车键盘控制
+roslaunch nics_bringup nics.launch # NICS赛道模拟，运行前请修改.world文件中的路径
+roslaunch racecar_control keyboard_teleop.launch # 小车键盘控制
 roslaunch task_line_follower task_line_follower.launch # 巡线任务
 ```
 
@@ -38,7 +39,7 @@ rosservice call /gazebo/set_model_state	'{model_state: {model_name: AKM_*, pose:
 在本功能包中可以通过
 
 ```
-rosrun racecar_control set_model_state.py AKM_* <x> <y> <theta>
+rosrun akm_control set_model_state.py AKM_* <x> <y> <theta>
 ```
 
 改变小车位置，传入的四个参数分别是小车名、相对世界坐标系的横纵坐标和 yaw 角（弧度制）
@@ -109,10 +110,33 @@ namespace 存在时在 rviz 中显示 "Frame does not exist"，建议检查 tf_t
 </node>
 ```
 
+### 8. 没有joint_states
+
+ 实际是因为模型的joint没有加载进来，可能有以下两个原因
+
+- 加载param文件时命名空间重复，即外面有namespace，yaml文件中又在开头加了namespace;
+- joint_states实际由/gazebo发出，依赖于controller_manager，同样如果<gruop>标签中已经定义了ns，则不需要在controller_manager传入的参数中再加入namespace
+
+### 9. 无法控制小车
+
+```shell
+sudo apt-get install ros-melodic-rqt-controller-manager
+```
+
+之后可通过
+
+```shell
+rosrun rqt_controller_manager rqt_controller_manager
+```
+
+
+查看各controller状态确定其是否正常工作
+
 ## Notes
 
 - 11.23: 合并巡线任务 
 - 11.18: 给赛道加入围栏
+- 11.30: 更新车体外观，加入静态障碍物
 
 ## Ref
 
