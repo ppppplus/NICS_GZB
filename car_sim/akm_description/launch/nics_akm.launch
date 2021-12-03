@@ -1,0 +1,38 @@
+<launch>
+    <arg name="robot_name" default="AKM_1"/>
+    <arg name="x_pos" default="0.5"/>
+    <arg name="y_pos" default="-1.8"/>
+    <arg name="z_pos" default="0.5"/>
+    <arg name="yaw_pos" default="0"/>
+
+    <!-- load the controllers -->
+    <node name="controller_manager" pkg="controller_manager" type="spawner" respawn="false"
+        output="screen" args="mini_akm_left_wheel_velocity_controller  
+        mini_akm_right_wheel_velocity_controller  mini_akm_left_steering_hinge_position_controller  
+        mini_akm_right_steering_hinge_position_controller  mini_akm_joint_state_controller"/> 
+
+    <node pkg="akm_control" type="sub_akm_cmd.py" name="sub_akm_cmd" output="screen"/>
+
+    <node pkg="akm_control" type="pub_akm_cmd.py" name="pub_akm_cmd" output="screen">
+        <param name="robot_name" type="string" value="$(arg robot_name)"/>
+    </node>
+    <!--load controller yaml-->
+    <rosparam file="$(find nics_bringup)/config/akm_control.yaml" command="load"/>
+
+    <node pkg="akm_control" name="gazebo_odometry_node" type="gazebo_odometry.py" output="screen">
+        <param name="robot_name" value="$(arg robot_name)"/>
+    </node>
+
+    <arg name="model" default="$(find xacro)/xacro --inorder '$(find akm_description)/urdf/mini_akm/mini_akm.xacro'"/>
+    <param name="robot_description" command="$(arg model)" />
+     <!-- tf -->
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"  output="screen" >
+        <remap from="/joint_states" to="/$(arg robot_name)/joint_states"/>
+        <param name="publish_frequency" type="double" value="50.0" />
+        <param name="tf_prefix" value="$(arg robot_name)"/>
+    </node>
+    <!-- load urdf-->
+    <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf" 
+          args="-urdf -model $(arg robot_name) -param robot_description -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos) -Y $(arg yaw_pos)"/> 
+
+</launch>

@@ -9,7 +9,6 @@ Ubuntu18.04 + ros melodic
 ```shell
 sudo apt-get install ros-melodic-ackermann-msgs
 sudo apt-get install ros-melodic-navigation
-sudo apt-get install ros-melodic-openslam-gmapping
 sudo apt-get install ros-melodic-geographic-info
 sudo apt-get install ros-melodic-controller-manager
 sudo apt-get install ros-melodic-gazebo-ros-control
@@ -22,13 +21,28 @@ sudo apt-get install ros-melodic-velocity-controllers
 
 **请修改nics_world.world、nics_world_cone.world中的URI路径，**并编译功能包。
 
+## Introduction
+
+- nics_bringup
+
+  NICS赛道的配置和加载，包含载入带有摄像头和雷达的小车以及赛道gazebo环境，其中赛道有三种模式：简单、静态障碍物和动态障碍物。**动态障碍物环境中，会有一辆AI小车绕赛道运动**，并且用户小车上的摄像头和激光雷达均可探索到这个AI小车。
+
+- car_sim
+
+  包含小车的描述、基本控制和基础功能的功能包。
+
+- nicsrobot_line_follower
+
+  巡线任务功能包。
+
 ## Tutorials
 
 ```
 roslaunch nics_bringup nics_gazebo_simple.launch # NICS赛道模拟，运行前请修改.world文件中的路径
 roslaunch nics_bringup nics_gazebo_block.launch # NICS障碍赛道模拟，运行前请修改.world文件中的路径
+roslaunch nics_bringup nics_gazebo_actor.launch # NICS动态障碍赛道模拟，运行前请修改.world文件中的路径
 roslaunch akm_control keyboard_teleop.launch # 小车键盘控制
-roslaunch task_line_follower task_line_follower.launch # 巡线任务
+roslaunch nicsrobot_line_follower nicsrobot_line_follower.launch # 简单场景巡线任务
 ```
 
 改变模型位置：http://gazebosim.org/tutorials?tut=ros_comm&cat=connect_ros
@@ -138,6 +152,7 @@ rosrun rqt_controller_manager rqt_controller_manager
 - 11.23: 合并巡线任务 
 - 11.18: 给赛道加入围栏
 - 11.30: 更新车体外观，加入静态障碍物
+- 12.3: 加入AI小车作为动态障碍物，根据新的车体调整了巡线任务代码
 
 ## Ref
 

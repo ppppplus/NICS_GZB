@@ -131,5 +131,12 @@
       </attenuation>
       <cast_shadows>0</cast_shadows>
     </light>
+    <gui fullscreen='0'>
+      <camera name='user_camera'>
+         <pose frame=''>0.140472 -3.59244 12.6221 0 1.25964 1.56819</pose>
+        <view_controller>orbit</view_controller>
+        <projection_type>perspective</projection_type>
+      </camera>
+    </gui>
   </world>
 </sdf>

@@ -1,35 +1,37 @@
 <launch>
-    <!--car_mode-->
-    <arg name="car_mode"  default="mini_akm" /> 
-    <!-- robot name-->
-    <arg name="robot_name" default="AKM_1"/>
-    <group ns="$(arg robot_name)">
-    <!-- load the controllers -->
-    <node name="controller_manager" pkg="controller_manager" type="spawner" respawn="false"
-        output="screen" args="$(arg car_mode)_left_wheel_velocity_controller  
-        $(arg car_mode)_right_wheel_velocity_controller  $(arg car_mode)_left_steering_hinge_position_controller  
-        $(arg car_mode)_right_steering_hinge_position_controller  $(arg car_mode)_joint_state_controller"/> 
+    <arg name="robot_name" value="AKM_1"/>
+    <arg name="world_name" value="$(find nics_bringup)/worlds/nics_scene/nics_world_cone.world"/>
+    <arg name="paused" default="false"/>
+    <arg name="use_sim_time" default="true"/>
+    <arg name="gui" default="true"/>
+    <arg name="headless" default="false"/>
+    <arg name="debug" default="false"/>
+    <arg name="x_pos" default="0.45"/>
+    <arg name="y_pos" default="-1.8"/>
+    <arg name="z_pos" default="0.5"/>
+    <arg name="yaw_pos" default="0"/>
 
-    <node pkg="akm_control" type="sub_akm_cmd.py" name="sub_akm_cmd" output="screen"/>
-
-    <node pkg="akm_control" type="pub_akm_cmd.py" name="pub_akm_cmd" output="screen">
-        <param name="robot_name" type="string" value="$(arg robot_name)"/>
-    </node>
-    <!--load controller yaml-->
-    <rosparam file="$(find nics_bringup)/config/akm_control.yaml" command="load"/>
-
-    <node pkg="akm_control" name="gazebo_odometry_node" type="gazebo_odometry.py" output="screen">
-        <param name="robot_name" value="$(arg robot_name)"/>
-    </node>
-    </group>
-
-    <include file="$(find akm_description)/launch/nics_robot_gazebo_block.launch" >
-        <arg name="robot_name" value="$(arg robot_name)"/>
-        <arg name="x_pos" value="0.45"/>
-        <arg name="y_pos" value="-1.8"/>
-        <arg name="z_pos" value="0.5"/>
-        <arg name="yaw_pos" value="0"/>
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" value="$(arg world_name)" />
+        <arg name="debug" value="$(arg debug)" />
+        <arg name="gui" value="$(arg gui)" />
+        <arg name="paused" value="$(arg paused)"/>
+        <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+        <arg name="headless" value="$(arg headless)"/>
     </include>
-    
-    <!-- <node name="rviz" pkg="rviz" type="rviz"  args="-d $(find nics_bringup)/rviz_config/$(arg car_mode).rviz"/> -->
+
+    <group ns="$(arg robot_name)">
+    <include file="$(find akm_description)/launch/nics_akm.launch" >
+        <arg name="robot_name" value="$(arg robot_name)"/>
+        <arg name="x_pos" value="$(arg x_pos)"/>
+        <arg name="y_pos" value="$(arg y_pos)"/>
+        <arg name="z_pos" value="$(arg z_pos)"/>
+        <arg name="yaw_pos" value="$(arg yaw_pos)"/>
+    </include>
+    </group>
+    <node name="rviz" pkg="rviz" type="rviz"  args="-d $(find nics_bringup)/rviz/akm.rviz">
+        <remap from="/move_base_simple/goal" to="/$(arg robot_name)/move_base_simple/goal"/>
+        <remap from="/initialpose" to="/$(arg robot_name)/initialpose"/>
+        <remap from="/clicked_point" to="/$(arg robot_name)/clicked_point"/>
+    </node>
 </launch>

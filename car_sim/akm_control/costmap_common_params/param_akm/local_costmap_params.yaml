@@ -1,6 +1,6 @@
 local_costmap:
-   global_frame: map #参数定义了代价地图应该运行的坐标系
-   robot_base_frame: base_footprint #参数定义了代价地图应该为机器人的基座的坐标系。
+   global_frame: AKM_1/map #参数定义了代价地图应该运行的坐标系
+   robot_base_frame: AKM_1/base_footprint #参数定义了代价地图应该为机器人的基座的坐标系。
    update_frequency: 5.0 #参数决定了代价地图更新的频率（以Hz为单位）。
    publish_frequency: 3.0 #参数决定代价地图发布可视化信息的速率（以Hz为单位）。
    #static_map: false #参数确定是否由map_server提供的地图服务来进行代价地图的初始化。

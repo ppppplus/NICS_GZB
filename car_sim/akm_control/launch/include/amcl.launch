@@ -1,8 +1,8 @@
 <launch>
     <arg name="use_map_topic" default="false"/>
-    <!-- 不可以使用PointCloud，只能使用LaserScan -->
-    <arg name="scan_topic" default="scan"/>
     <arg name="map_topic"  default="/map"/>
+    <arg name="odom_frame_id" default="odom"/>
+    <arg name="base_frame_id"  default="base_footprint"/>
     <node pkg="amcl" type="amcl" name="amcl" clear_params="true">
       <param name="min_particles" value="500"/>
       <param name="max_particles" value="2000"/>
@@ -39,8 +39,7 @@
       <param name="odom_alpha3" value="0.2"/>
       <param name="odom_alpha4" value="0.2"/>
       <param name="odom_alpha5" value="0.1"/>
-      <param name="odom_frame_id" value="odom"/>
-      <param name="base_frame_id" value="base_footprint"/>
-      <remap from="scan" to="$(arg scan_topic)"/>
+      <param name="odom_frame_id" value="$(arg odom_frame_id)"/>
+      <param name="base_frame_id" value="$(arg base_frame_id)"/>
     </node>
 </launch>

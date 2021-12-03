@@ -11,7 +11,7 @@ def set_model_state(name, x, y, theta):
     objstate.model_state.model_name = name
     objstate.model_state.pose.position.x = float(x)
     objstate.model_state.pose.position.y = float(y)
-    objstate.model_state.pose.position.z = 0.05
+    objstate.model_state.pose.position.z = 0.5
     ow, ox, oy, oz = RPY2Quar(float(theta))
     objstate.model_state.pose.orientation.x = ox
     objstate.model_state.pose.orientation.y = oy

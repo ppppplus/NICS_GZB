@@ -1,0 +1,19 @@
+<launch>
+  <arg name="robot_name" default="AKM_1"/>
+  <group ns="$(arg robot_name)">
+  <!-- navigation common params-->
+  <rosparam file="$(find akm_control)/costmap_common_params/param_akm/local_costmap_params.yaml"      command="load" ns="move_base"/>
+  <rosparam file="$(find akm_control)/costmap_common_params/param_akm/global_costmap_params.yaml"     command="load" ns="move_base"/>
+  <rosparam file="$(find akm_control)/param_common/move_base_params.yaml"          command="load" ns="move_base"/>
+  <rosparam file="$(find akm_control)/param_common/base_global_planner_param.yaml" command="load" ns="move_base"/>
+  <rosparam file="$(find akm_control)/costmap_common_params/param_akm/teb_local_planner_params.yaml"  command="load" ns="move_base"/>
+  <param name="move_base/base_local_planner"    type="string" value="teb_local_planner/TebLocalPlannerROS"/>
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    <rosparam file="$(find akm_control)/costmap_common_params/param_akm/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find akm_control)/costmap_common_params/param_akm/costmap_common_params.yaml" command="load" ns="local_costmap" />
+  </node>
+  
+  </group>
+</launch>
+
+

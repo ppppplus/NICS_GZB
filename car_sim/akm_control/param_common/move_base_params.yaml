@@ -1,6 +1,6 @@
 shutdown_costmaps: false  #当move_base在不活动状态时,是否关掉costmap.
 
-controller_frequency: 10.0  #向底盘控制移动话题cmd_vel发送命令的频率.
+controller_frequency: 5.0  #向底盘控制移动话题cmd_vel发送命令的频率.
 controller_patience: 3.0 #在空间清理操作执行前,控制器花多长时间等有效控制下发
  
 planner_frequency: 1.0  #全局规划操作的执行频率.如果设置为0.0,则全局规划器仅

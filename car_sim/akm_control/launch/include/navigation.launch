@@ -1,18 +1,21 @@
 
 <launch>
- <!-- 开启仿真节点-->
- <include file="$(find akm_control)/launch/akm_control.launch" >
-   <arg name="gazebo_navigation" default="true"/>
- </include>
- <!-- 设置需要用于导航的地图  -->
- <arg name="map_file" default="$(find akm_control)/map/map.yaml"/>
- <node name="map_server_for_test" pkg="map_server" type="map_server" args="$(arg map_file)" output="screen" >
- </node>
- <!-- 开启用于导航的自适应蒙特卡洛定位amcl-->
- <include file="$(find akm_control)/launch/include/amcl.launch" />
- <!-- MarkerArray功能节点 -->
- <node name='send_mark' pkg="akm_control" type="send_mark.py">
- </node>
+  <arg name="robot_name" default="AKM_1"/>
+  <group ns="$(arg robot_name)">
+  <!-- 设置需要用于导航的地图  -->
+  <arg name="map_file" default="$(find nics_bringup)/map/mymap.yaml"/>
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" output="screen" >
+  </node>
+  <!-- 开启用于导航的自适应蒙特卡洛定位amcl-->
+  <include file="$(find akm_control)/launch/include/amcl.launch">
+    <arg name="use_map_topic" default="false"/>
+    <arg name="map_topic"  default="$(arg robot_name)/map"/>
+    <arg name="odom_frame_id" default="$(arg robot_name)/odom"/>
+    <arg name="base_frame_id"  default="$(arg robot_name)/base_footprint"/>
+  </include>
+  <!-- MarkerArray功能节点 -->
+  <node name='send_mark' pkg="akm_control" type="send_mark.py"/>
+  </group>
 </launch>
 
 

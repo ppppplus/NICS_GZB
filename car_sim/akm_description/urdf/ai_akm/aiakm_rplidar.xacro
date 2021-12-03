@@ -5,7 +5,7 @@
         <link name="${LA}_link">
             <box_inertial_matrix  m="0.001" w="0.001" h="0.001" d="0.001"/>
             <visual>
-                <origin xyz=" 0 0 0" rpy="0 0 0" />
+                <origin xyz=" 0 0 -0.07 " rpy="0 0 0" />
                 <geometry>
                     <!--add rplidar mesh-->
                     <mesh filename="package://akm_description/meshes/mini_akm/rplidar_link.STL" />

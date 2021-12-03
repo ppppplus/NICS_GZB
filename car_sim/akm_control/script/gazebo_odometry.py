@@ -87,7 +87,8 @@ class OdometryNode:
 if __name__ == '__main__':
     #初始化节点
     rospy.init_node("gazebo_odometry_node")
-    robot_name = rospy.get_param("robot_name", "AKM_1")
+    robot_name = rospy.get_param("~robot_name", "AKM_1")
+    rospy.logwarn("robot_name:%s", robot_name)
     #类的实例化
     node = OdometryNode(robot_name)
     rospy.spin()
