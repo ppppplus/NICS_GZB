@@ -153,6 +153,7 @@ rosrun rqt_controller_manager rqt_controller_manager
 - 11.18: 给赛道加入围栏
 - 11.30: 更新车体外观，加入静态障碍物
 - 12.3: 加入AI小车作为动态障碍物，根据新的车体调整了巡线任务代码
+- 12.7: 解决巡线任务不停止的问题
 
 ## Ref
 
