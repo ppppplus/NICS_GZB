@@ -1,13 +1,13 @@
 <launch>
     <arg name="robot_name" value="AKM_1"/>
-    <arg name="world_name" value="$(find nics_bringup)/worlds/nics_scene/nics_world.world"/>
+    <arg name="world_name" value="$(find nics_bringup)/worlds/nics_scene_new/nics_world.world"/>
     <arg name="paused" default="false"/>
     <arg name="use_sim_time" default="true"/>
     <arg name="gui" default="true"/>
     <arg name="headless" default="false"/>
     <arg name="debug" default="false"/>
-    <arg name="x_pos" default="0.45"/>
-    <arg name="y_pos" default="-1.8"/>
+    <arg name="x_pos" default="4.4"/>
+    <arg name="y_pos" default="-2.6"/>
     <arg name="z_pos" default="0.5"/>
     <arg name="yaw_pos" default="0"/>
 
