@@ -1,10 +1,11 @@
 <launch>
     <arg name="robot_name" value="AKM_1"/>
     <arg name="ai1_name" value="AI_1"/>
+    <arg name="ai2_name" value="AI_2"/>
     <arg name="world_name" value="$(find nics_bringup)/worlds/nics_scene_new/nics_world.world"/>
     <arg name="paused" default="false"/>
     <arg name="use_sim_time" default="true"/>
-    <arg name="gui" default="true"/>
+    <arg name="gui" default="false"/>
     <arg name="headless" default="false"/>
     <arg name="debug" default="false"/>
     <arg name="x_pos" default="4.4"/>
@@ -41,8 +42,24 @@
     </include>
     </group>
 
+    <group ns="$(arg ai2_name)">
+    <include file="$(find akm_description)/launch/nics_akm_actor.launch" >
+        <arg name="robot_name" value="$(arg ai2_name)"/>
+        <arg name="x_pos" value="0.6"/>
+        <arg name="y_pos" value="-2.6"/>
+        <arg name="z_pos" value="0.2"/>
+        <arg name="yaw_pos" value="3.14"/>
+    </include>
+    </group>
+
     <include file="$(find akm_control)/launch/include/rotnav.launch">
         <arg name="robot_name" value="$(arg ai1_name)"/>
+        <param name="pointy" type="float" value="4"/>
+    </include>
+
+    <include file="$(find akm_control)/launch/include/rotnav.launch">
+        <arg name="robot_name" value="$(arg ai2_name)"/>
+        <arg name="pointy" value="1.4"/>
     </include>
 
     <node name="rviz" pkg="rviz" type="rviz"  args="-d $(find nics_bringup)/rviz/akm.rviz">

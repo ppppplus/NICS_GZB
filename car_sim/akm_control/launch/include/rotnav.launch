@@ -1,26 +1,28 @@
 <launch>
   <arg name="robot_name" default="AI_1"/>
+  <arg name="pointy" default="4"/>
   <group ns="$(arg robot_name)">
-  <arg name="map_file" default="$(find nics_bringup)/map/mymap.yaml"/>
+  <arg name="map_file" default="$(find nics_bringup)/map/map_new.yaml"/>
   <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" output="screen" >
     <param name="frame_id" value="$(arg robot_name)/map"/>
   </node>
   <node name="map2odom" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 $(arg robot_name)/map $(arg robot_name)/odom 50"/>
   
   <!-- navigation common params-->
-  <rosparam file="$(find akm_control)/costmap_common_params/param_ai/local_costmap_params.yaml"      command="load" ns="move_base"/>
-  <rosparam file="$(find akm_control)/costmap_common_params/param_ai/global_costmap_params.yaml"     command="load" ns="move_base"/>
+  <rosparam file="$(find akm_control)/costmap_common_params/param_$(arg robot_name)/local_costmap_params.yaml"      command="load" ns="move_base"/>
+  <rosparam file="$(find akm_control)/costmap_common_params/param_$(arg robot_name)/global_costmap_params.yaml"     command="load" ns="move_base"/>
   <rosparam file="$(find akm_control)/param_common/move_base_params.yaml"          command="load" ns="move_base"/>
   <rosparam file="$(find akm_control)/param_common/base_global_planner_param.yaml" command="load" ns="move_base"/>
-  <rosparam file="$(find akm_control)/costmap_common_params/param_ai/teb_local_planner_params.yaml"  command="load" ns="move_base"/>
+  <rosparam file="$(find akm_control)/costmap_common_params/param_$(arg robot_name)/teb_local_planner_params.yaml"  command="load" ns="move_base"/>
   <param name="move_base/base_local_planner"    type="string" value="teb_local_planner/TebLocalPlannerROS"/>
   <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
-    <rosparam file="$(find akm_control)/costmap_common_params/param_ai/costmap_common_params.yaml" command="load" ns="global_costmap" />
-    <rosparam file="$(find akm_control)/costmap_common_params/param_ai/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find akm_control)/costmap_common_params/param_$(arg robot_name)/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find akm_control)/costmap_common_params/param_$(arg robot_name)/costmap_common_params.yaml" command="load" ns="local_costmap" />
   </node>
 
   <node name='rot_nav' pkg="akm_control" type="rot_nav.py" output="screen">
     <param name="robot_name" type="string" value="$(arg robot_name)"/>
+    <param name="pointy" type="double" value="$(arg pointy)"/>
   </node>
   </group>
 </launch>

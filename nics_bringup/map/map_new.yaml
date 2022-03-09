@@ -1,4 +1,4 @@
-image: /home/nics/TJH_WS/nicsgzb_ws/src/nics_bringup/map/map_new.pgm
+image: /home/trevor/nicsgzb_ws/src/NICS_GZB/nics_bringup/map/map_new.pgm
 resolution: 0.050000
 origin: [-12.200000, -15.400000, 0.000000]
 negate: 0

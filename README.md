@@ -41,6 +41,7 @@ sudo apt-get install ros-melodic-velocity-controllers
 roslaunch nics_bringup nics_gazebo_simple.launch # NICS赛道模拟，运行前请修改.world文件中的路径
 roslaunch nics_bringup nics_gazebo_block.launch # NICS障碍赛道模拟，运行前请修改.world文件中的路径
 roslaunch nics_bringup nics_gazebo_actor.launch # NICS动态障碍赛道模拟，运行前请修改.world文件中的路径
+roslaunch nics_bringup nics_gazebo_actor_2.launch # NICS双车动态障碍赛道模拟，运行前请修改.world文件中的路径
 roslaunch akm_control keyboard_teleop.launch # 小车键盘控制
 roslaunch nicsrobot_line_follower nicsrobot_line_follower.launch # 简单场景巡线任务
 ```
