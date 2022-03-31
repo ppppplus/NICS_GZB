@@ -1,0 +1,7 @@
+<launch>
+        <!-- Detection node -->
+<node pkg="nicsrobot_line_follower" name="detection_node" type="detection_node_2.py"  output="screen"></node>
+		<!-- Robot commands node -->
+<node pkg="nicsrobot_line_follower" name="motion_node" type="motion_node_2.py"  output="screen"></node>
+
+</launch>

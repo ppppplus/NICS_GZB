@@ -1,7 +1,7 @@
 <launch>
     <arg name="robot_name" value="AKM_1"/>
     <arg name="ai1_name" value="AI_1"/>
-    <arg name="world_name" value="$(find nics_bringup)/worlds/nics_scene_new/nics_world.world"/>
+    <arg name="world_name" value="$(find nics_bringup)/worlds/nics_scene/nics_world.world"/>
     <arg name="paused" default="false"/>
     <arg name="use_sim_time" default="true"/>
     <arg name="gui" default="true"/>
