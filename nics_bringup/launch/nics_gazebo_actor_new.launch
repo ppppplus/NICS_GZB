@@ -42,24 +42,9 @@
     </include>
     </group>
 
-    <group ns="$(arg ai2_name)">
-    <include file="$(find akm_description)/launch/nics_akm_actor.launch" >
-        <arg name="robot_name" value="$(arg ai2_name)"/>
-        <arg name="x_pos" value="0.6"/>
-        <arg name="y_pos" value="-2.6"/>
-        <arg name="z_pos" value="0.2"/>
-        <arg name="yaw_pos" value="3.14"/>
-    </include>
-    </group>
-
-    <include file="$(find akm_control)/launch/include/rotnav.launch">
+    <include file="$(find akm_control)/launch/include/rotnav_new.launch">
         <arg name="robot_name" value="$(arg ai1_name)"/>
         <param name="pointy" type="float" value="4"/>
-    </include>
-
-    <include file="$(find akm_control)/launch/include/rotnav.launch">
-        <arg name="robot_name" value="$(arg ai2_name)"/>
-        <arg name="pointy" value="1.4"/>
     </include>
 
     <node name="rviz" pkg="rviz" type="rviz"  args="-d $(find nics_bringup)/rviz/akm.rviz">

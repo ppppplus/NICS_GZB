@@ -21,7 +21,7 @@
         <visual name="visual">
           <geometry>
             <mesh>
-              <uri>file:///home/nics/TJH_WS/nicsgzb_ws/src/nics_gzb/nics_bringup/worlds/nics_scene_new/nics_world_new.dae</uri>
+              <uri>file://nics_world_new.dae</uri>
               <scale>0.8 0.8 0.8</scale>
             </mesh>
           </geometry>
@@ -35,7 +35,7 @@
           <pose frame=''>0 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
-              <uri>file:///home/nics/TJH_WS/nicsgzb_ws/src/nics_gzb/nics_bringup/worlds/nics_scene_new/nics_world_new.dae</uri>
+              <uri>file://nics_world_new.dae</uri>
               <scale>0.8 0.8 0.8</scale>
             </mesh>
           </geometry>
@@ -52,7 +52,7 @@
           <pose frame=''>0 0 0 0 -0 0</pose>
           <geometry>
             <mesh>
-              <uri>file:///home/nics/TJH_WS/nicsgzb_ws/src/nics_gzb/nics_bringup/worlds/nics_scene_new/nics_fence.stl</uri>
+              <uri>file://nics_fence.stl</uri>
               <scale>0.8 0.8 0.8</scale>
             </mesh>
           </geometry>

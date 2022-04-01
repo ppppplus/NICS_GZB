@@ -1,7 +1,8 @@
 <launch>
   <arg name="robot_name" default="AI_1"/>
+  <arg name="pointy" default="4"/>
   <group ns="$(arg robot_name)">
-  <arg name="map_file" default="$(find nics_bringup)/map/mymap.yaml"/>
+  <arg name="map_file" default="$(find nics_bringup)/map/map_new.yaml"/>
   <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" output="screen" >
     <param name="frame_id" value="$(arg robot_name)/map"/>
   </node>
@@ -19,8 +20,9 @@
     <rosparam file="$(find akm_control)/costmap_common_params/param_$(arg robot_name)/costmap_common_params.yaml" command="load" ns="local_costmap" />
   </node>
 
-  <node name='rot_nav' pkg="akm_control" type="rot_nav.py" output="screen">
+  <node name='rot_nav' pkg="akm_control" type="rot_nav_new.py" output="screen">
     <param name="robot_name" type="string" value="$(arg robot_name)"/>
+    <param name="pointy" type="double" value="$(arg pointy)"/>
   </node>
   </group>
 </launch>

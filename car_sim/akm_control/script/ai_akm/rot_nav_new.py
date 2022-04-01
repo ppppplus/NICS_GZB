@@ -13,9 +13,9 @@ import sys, select, termios, tty
 import time
 
 class RotNav():
-    def __init__(self, robot_name):
+    def __init__(self, robot_name, pointy):
         self.robot_name = robot_name
-        self.goal_list = [2.5,-1.5,0,-2.5,-1.5,0,0,-0.2,1]
+        self.goal_list = [0.6,-2.6,0,-3.2,-0.4,0,-0.3,pointy,1]
         self.markerArray = MarkerArray()
         self.markerArray_number = MarkerArray()
         self.count = 3
@@ -224,6 +224,7 @@ if __name__ == '__main__':
     rospy.on_shutdown(breakkey)#退出前执行键值初始化
     rospy.init_node('path_point_demo') #初始化节点
     robot_name = rospy.get_param('~robot_name', 'AI_1')
+    pointy = rospy.get_param('~pointy', 4)
     rospy.logwarn("ai_name:%s", robot_name)
-    node = RotNav(robot_name)
+    node = RotNav(robot_name, pointy)
 
