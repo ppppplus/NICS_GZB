@@ -32,7 +32,7 @@ class MotionNode:
         self.velocityPub_=rospy.Publisher('/AKM_1/cmd_vel', Twist, queue_size=5)
 
         #辅助裁判函数，计时并判断比赛完成
-        self.JugeInit()
+        # self.JugeInit()
         while not rospy.is_shutdown():
             self.GetVelocity()
             self.rate.sleep()
